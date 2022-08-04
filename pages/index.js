@@ -29,12 +29,12 @@ export default function Home() {
 						return (
 							<Card
 								name={coffeeStore.name}
-								imgUrl="/static/hero-image.png"
-								href={coffeeStore.websiteUrl}
+								imgUrl={coffeeStore.imgUrl}
+								href={`/coffee-store/${coffeeStore.id}`}
 								className={styles.card}
 								key={coffeeStore.id}
 							/>
-						)						
+						)
 					})}
 					
 				</div>
