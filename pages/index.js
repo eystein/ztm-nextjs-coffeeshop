@@ -5,8 +5,17 @@ import Card from '../components/card'
 import styles from '../styles/Home.module.css'
 import coffeeStores from '../data/coffee-stores.json'
 
+export async function getStaticProps(context) {
+	return {
+		props: {
+			coffeeStores, // key: value; -> coffeeStores: coffeeStores; -> coffeeStores
+		}, // will be passed to the page component as props
+	}
+}
 
-export default function Home() {
+
+export default function Home(props) {
+	console.log('props', props);
 	const handleOnBannerBtnClick = () => {
 		console.log('Button clicked')
 	}
@@ -25,7 +34,7 @@ export default function Home() {
 					<Image src="/static/hero-image.png" alt="Illustration of woman sitting on a cloud and drinking coffee." width={700} height={400} />
 				</div>
 				<div className={styles.cardLayout}>
-					{coffeeStores.map((coffeeStore) => {
+					{props.coffeeStores.map((coffeeStore) => {
 						return (
 							<Card
 								name={coffeeStore.name}
