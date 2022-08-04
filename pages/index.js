@@ -3,13 +3,13 @@ import Image from 'next/image'
 import Banner from '../components/banner'
 import Card from '../components/card'
 import styles from '../styles/Home.module.css'
-import coffeeStores from '../data/coffee-stores.json'
+import coffeeStoresData from '../data/coffee-stores.json'
 
 export async function getStaticProps(context) {
 	console.log('hi getStaticProps');
 	return {
 		props: {
-			coffeeStores, // key: value; -> coffeeStores: coffeeStores; -> coffeeStores
+			coffeeStores: coffeeStoresData, // key: value; -> coffeeStores: coffeeStores; -> coffeeStores
 		}, // will be passed to the page component as props
 	}
 }
@@ -33,7 +33,7 @@ export default function Home(props) {
 				<div className={styles.heroImage}>
 					<Image src="/static/hero-image.png" alt="Illustration of woman sitting on a cloud and drinking coffee." width={700} height={400} />
 				</div>
-				{coffeeStores.length > 0 && (
+				{props.coffeeStores.length > 0 && (
 					<>
 						<h2 className={styles.heading2}>Toronto stores</h2>
 						<div className={styles.cardLayout}>
