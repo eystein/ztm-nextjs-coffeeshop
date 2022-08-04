@@ -21,7 +21,7 @@ export function getStaticPaths() {
 			{ params: { id: '1' } },
 			{ params: { id: '300' } }
 		],
-		fallback: false,
+		fallback: true,
 	}
 }
 
@@ -29,6 +29,11 @@ const CoffeeStore = (props) => {
 	const router = useRouter()
 	console.log('router', router)
 	console.log('props', props)
+
+	if (router.isFallback) {
+		return <div>Loading...</div>
+	}
+
 	return (
 		<>
 			<Link href="/">
