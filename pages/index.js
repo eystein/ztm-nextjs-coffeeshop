@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css'
 import coffeeStores from '../data/coffee-stores.json'
 
 export async function getStaticProps(context) {
+	console.log('hi getStaticProps');
 	return {
 		props: {
 			coffeeStores, // key: value; -> coffeeStores: coffeeStores; -> coffeeStores
@@ -15,7 +16,6 @@ export async function getStaticProps(context) {
 
 
 export default function Home(props) {
-	console.log('props', props);
 	const handleOnBannerBtnClick = () => {
 		console.log('Button clicked')
 	}
