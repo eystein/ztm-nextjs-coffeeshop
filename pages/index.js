@@ -6,7 +6,6 @@ import styles from '../styles/Home.module.css'
 import { fetchCoffeeStores } from '../lib/coffee-stores'
 
 export async function getStaticProps(context) {
-	console.log('hi getStaticProps', getStaticProps);
 	
 	const coffeeStores = await fetchCoffeeStores();
 
