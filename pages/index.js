@@ -3,10 +3,10 @@ import Image from 'next/image'
 import Banner from '../components/banner'
 import Card from '../components/card'
 import styles from '../styles/Home.module.css'
-import coffeeStoresData from '../data/coffee-stores.json'
 
 export async function getStaticProps(context) {
-	console.log('hi getStaticProps');
+	console.log('hi getStaticProps', getStaticProps);
+	
 	const options = {
 		method: 'GET',
 		headers: {
@@ -15,7 +15,10 @@ export async function getStaticProps(context) {
 		}
 	};
 
-	const response = await fetch('https://api.foursquare.com/v3/places/search?query=coffee&ll=59.91906609702544%2C10.730781622010616&limit=6', options);
+	const response = await fetch(
+		'https://api.foursquare.com/v3/places/search?query=coffee&ll=45.931574%2C6.766988&limit=6', 
+		options
+	);
 
 	const data = await response.json();
 	console.log(data.results);
