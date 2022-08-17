@@ -3,30 +3,16 @@ import Image from 'next/image'
 import Banner from '../components/banner'
 import Card from '../components/card'
 import styles from '../styles/Home.module.css'
+import { fetchCoffeeStores } from '../lib/coffee-stores'
 
 export async function getStaticProps(context) {
 	console.log('hi getStaticProps', getStaticProps);
 	
-	const options = {
-		method: 'GET',
-		headers: {
-			Accept: 'application/json',
-			Authorization: process.env.FOURSQUARE_API_KEY,
-		}
-	};
-
-	const response = await fetch(
-		'https://api.foursquare.com/v3/places/search?query=coffee&ll=45.931574%2C6.766988&limit=6', 
-		options
-	);
-
-	const data = await response.json();
-	console.log(data.results);
-	// .catch(err => console.error(err));
+	const coffeeStores = await fetchCoffeeStores();
 
 	return {		
 		props: {
-			coffeeStores: data.results, 
+			coffeeStores: coffeeStores, 
 		}, // will be passed to the page component as props
 	}
 	
