@@ -14,7 +14,7 @@ export async function getStaticProps(staticProps) {
 	return {
 		props: {
 			coffeeStore: coffeeStores.find((coffeeStore) =>  { 
-				return coffeeStore.fsq_id.toString() === params.id
+				return coffeeStore.id.toString() === params.id;
 			}),
 		},
 	}
@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 	const paths = coffeeStores.map((coffeeStore) => {
 		return {
 			params: {
-				id: coffeeStore.fsq_id.toString(),
+				id: coffeeStore.id.toString(),
 			},
 		}
 	})
@@ -42,7 +42,7 @@ const CoffeeStore = (props) => {
 		return <div>Loading...</div>
 	}
 
-	const { location, name, locality, imgUrl } = props.coffeeStore
+	const { name, neighborhood, address,  imgUrl } = props.coffeeStore
 
 	const handleUpvoteButton = () => {
 		console.log('handle upvote');
@@ -77,11 +77,11 @@ const CoffeeStore = (props) => {
 				<div className={cls("glass", styles.col2)}>
 					<div className={styles.iconWrapper}>
 						<Image src="/static/icons/places.svg" width="24" height="24" alt="Address" />
-						<p className={styles.text}>{location.address}</p>
+						<p className={styles.text}>{address}</p>
 					</div>
 					<div className={styles.iconWrapper}>
 						<Image src="/static/icons/nearMe.svg" width="24" height="24" alt="Neighbourhood" />
-						<p className={styles.text}>{location.locality}</p>
+						<p className={styles.text}>{neighborhood}</p>
 					</div>
 					<div className={styles.iconWrapper}>
 						<Image src="/static/icons/star.svg" width="24" height="24" alt="Rating" />
