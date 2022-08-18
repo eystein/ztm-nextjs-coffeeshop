@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -103,7 +106,11 @@ function CoffeeStore(props) {
 						<p className={styles.text}>1</p>
 					</div>
 
-					<button className={styles.upvoteButton} type='submit' onClick={handleUpvoteButton}>
+					<button
+						className={styles.upvoteButton}
+						type="submit"
+						onClick={handleUpvoteButton}
+					>
 						Up vote!
 					</button>
 				</div>
