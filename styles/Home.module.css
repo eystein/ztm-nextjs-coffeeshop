@@ -15,7 +15,6 @@
   padding-right: 1rem /* 16px */;
 }
 
-
 .heroImage {
   position: absolute;
   top: 0px;
@@ -41,6 +40,10 @@
   color: var(--text-white-100);
 }
 
+.sectionWrapper {
+  margin-top: 5rem;
+}
+
 /** Breakpoints:
   sm: min-width: 640px;
   md: min-width: 768px;
@@ -61,7 +64,7 @@
     padding-right: 1.5rem /* 24px */;
   }
 
-	.cardLayout {
+  .cardLayout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -76,10 +79,9 @@
     margin-top: 4rem /* 64px */;
   }
 
-	.heroImage {
+  .heroImage {
     right: 20%;
   }
-
 }
 
 @media (min-width: 1024px) {
@@ -93,12 +95,11 @@
     padding-right: 2rem /* 32px */;
   }
 
-	.heroImage {
+  .heroImage {
     right: 20%;
   }
 
-	.cardLayout {
+  .cardLayout {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-

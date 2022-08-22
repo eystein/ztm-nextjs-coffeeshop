@@ -41,6 +41,9 @@ export default function Home(props) {
           buttonText={isFindingLocation ? "Locating..." : "View stores nearby"}
           handleOnClick={handleOnBannerBtnClick}
         />
+        <div className={styles.errorMessage}>
+          {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
+        </div>
         <div className={styles.heroImage}>
           <Image
             src="/static/hero-image.png"
@@ -50,7 +53,7 @@ export default function Home(props) {
           />
         </div>
         {props.coffeeStores.length > 0 && (
-          <>
+          <div className={styles.sectionWrapper}>
             <h2 className={styles.heading2}>Toronto stores</h2>
             <div className={styles.cardLayout}>
               {props.coffeeStores.map((coffeeStore) => {
@@ -68,7 +71,7 @@ export default function Home(props) {
                 );
               })}
             </div>
-          </>
+          </div>
         )}
       </main>
     </div>
