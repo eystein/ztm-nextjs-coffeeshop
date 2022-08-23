@@ -10,7 +10,7 @@ const useTrackLocation = () => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    setLatLong(`${latitude}, ${longitude}`);
+    setLatLong(`${latitude},${longitude}`);
     setLocationErrorMsg(""); // Empty possible previous error msg.
     setIsFindingLocation(false);
   };
