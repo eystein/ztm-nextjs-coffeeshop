@@ -24,6 +24,7 @@ export default function Home(props) {
     useTrackLocation();
 
   const [coffeeStores, setCoffeeStores] = useState("");
+  const [coffeeStoresError, setCoffeeStoresError] = useState(null);
 
   useEffect(() => {
     async function setCoffeeStoresByLocation() {
@@ -35,7 +36,8 @@ export default function Home(props) {
           setCoffeeStores(fetchedCoffeeStores);
         } catch (error) {
           // set error
-          console.log("error: ", { error });
+          console.log({ error });
+          setCoffeeStoresError(error.message);
         }
       }
     }
@@ -63,6 +65,11 @@ export default function Home(props) {
         />
         <div className={styles.errorMessage}>
           {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
+        </div>
+        <div className={styles.errorMessage}>
+          {coffeeStoresError && (
+            <p>Something went wrong: {coffeeStoresError}</p>
+          )}
         </div>
         <div className={styles.heroImage}>
           <Image
