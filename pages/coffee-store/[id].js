@@ -19,7 +19,7 @@ export async function getStaticProps(staticProps) {
   return {
     props: {
       // if findfindCoffeeStoreById exists, then findCoffeeStoreById, else create empty object
-      // the empty object is the page! That allows for
+      // the empty object is the page! That givs getStaticPaths something to insert into, when dynamic.
       coffeeStore: findCoffeeStoreById ? findCoffeeStoreById : {},
     },
   };
