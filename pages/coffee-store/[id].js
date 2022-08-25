@@ -9,6 +9,9 @@ import cls from "classnames";
 
 import styles from "../../styles/coffee-store.module.css";
 import { fetchCoffeeStores } from "../../lib/coffee-stores";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../_app";
+import { isEmpty } from "../../utils";
 
 export async function getStaticProps(staticProps) {
   const { params } = staticProps;
@@ -40,14 +43,37 @@ export async function getStaticPaths() {
   };
 }
 
-function CoffeeStore(props) {
+function CoffeeStore(initialProps) {
   const router = useRouter();
 
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
-  const { name, address, neighborhood, imgUrl } = props.coffeeStore;
+  // Get the id from the URL/router (to use for dynamic pages)
+  const id = router.query.id;
+
+  // Set the props to use the initial state
+  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore);
+
+  // Get the state from context
+  const {
+    state: { coffeeStores },
+  } = useContext(StoreContext);
+
+  useEffect(() => {
+    // if coffeestore is empty, then use
+    if (isEmpty(initialProps.coffeeStore)) {
+      const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
+        return coffeeStore.id.toString() === id; // dynamic ID
+      });
+      if (coffeeStores.length > 0) {
+        setCoffeeStore(findCoffeeStoreById);
+      }
+    }
+  }, [id]);
+
+  const { name, address, neighborhood, imgUrl } = coffeeStore;
 
   const handleUpvoteButton = () => {
     console.log("handle upvote");
