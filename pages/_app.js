@@ -2,10 +2,10 @@ import { createContext, useReducer } from "react";
 import "../styles/globals.css";
 
 // Create context
-const StoreContext = createContext();
+export const StoreContext = createContext();
 
 // Constants that can be referenced with the reducer
-const ACTION_TYPES = {
+export const ACTION_TYPES = {
   SET_LAT_LONG: "SET_LAT_LONG",
   SET_COFFEE_STORES: "SET_COFFEE_STORES",
 };
@@ -18,7 +18,7 @@ const storeReducer = (state, action) => {
       return { ...state, latLong: action.payload.latLong };
     }
     case ACTION_TYPES.SET_COFFEE_STORES: {
-      return { ...state, coffeStores: action.payload.coffeStores };
+      return { ...state, coffeeStores: action.payload.coffeeStores };
     }
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -30,7 +30,7 @@ const StoreProvider = ({ children }) => {
   // Initialise a state to give it something to work with
   const initialState = {
     latLong: "",
-    coffeStores: [],
+    coffeeStores: [],
   };
 
   // hook up the reducer
