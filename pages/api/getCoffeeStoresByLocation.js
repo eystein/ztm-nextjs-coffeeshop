@@ -5,7 +5,7 @@ const getCoffeeStoresByLocation = async (req, res) => {
 
   try {
     const { latLong, limit } = req.query;
-    const response = await fetchCoffeeStores(latLong, limit);
+    const response = await fetchCoffeeStores(latLong, 6);
 
     // return, otherwise it gets stuck in a loop
     res.status(200);
