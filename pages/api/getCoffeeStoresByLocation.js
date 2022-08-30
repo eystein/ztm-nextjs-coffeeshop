@@ -5,12 +5,11 @@ const getCoffeeStoresByLocation = async (req, res) => {
 
   try {
     const { latLong, limit } = req.query;
-    const response = await fetchCoffeeStores(latLong, 8);
+    const response = await fetchCoffeeStores(latLong, limit);
 
     // return, otherwise it gets stuck in a loop
     res.status(200);
     res.json(response);
-    console.log("this is working great!");
   } catch (err) {
     console.error("There is an error", err);
     // return, otherwise it gets stuck in a loop

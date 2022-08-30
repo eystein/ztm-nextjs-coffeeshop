@@ -33,7 +33,7 @@ export default function Home(props) {
     async function setCoffeeStoresByLocation() {
       if (latLong) {
         try {
-          // const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 8);
+          const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 8);
           // set coffee stores
           // setCoffeeStores(fetchedCoffeeStores);
           dispatch({
