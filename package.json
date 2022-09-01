@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-		"pa11y-ci": "pa11y-ci"
+    "pa11y-ci": "pa11y-ci"
   },
   "dependencies": {
+    "airtable": "^0.11.4",
     "classnames": "^2.3.1",
     "next": "^12.2.4-canary.8",
     "react": "18.2.0",
