@@ -8,6 +8,7 @@ import useTrackLocation from "../hooks/use-track-location";
 import { useEffect, useState, useContext } from "react";
 import { ACTION_TYPES, StoreContext } from "../store/store-context";
 
+// Renders on the server
 export async function getStaticProps(context) {
   const coffeeStores = await fetchCoffeeStores();
   return {
@@ -17,6 +18,7 @@ export async function getStaticProps(context) {
   };
 }
 
+// Renders on the client
 export default function Home(props) {
   const { handleTrackLocation, locationErrorMsg, isFindingLocation } =
     useTrackLocation();
