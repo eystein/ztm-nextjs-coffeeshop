@@ -48,7 +48,14 @@ const createCoffeeStore = async (req, res) => {
             },
           },
         ]);
-        res.json({ message: "create a record", records: createRecords });
+
+        // Same filtering as if exists above
+        const records = createRecords.map((record) => {
+          return {
+            ...record.fields,
+          };
+        });
+        res.json({ message: "created a record", records: records });
       }
     } catch (err) {
       // console log error
