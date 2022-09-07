@@ -16,7 +16,7 @@ const createCoffeeStore = async (req, res) => {
       // find a record
       const findCoffeeStoreRecords = await table
         .select({
-          filterByFormula: `id="0"`,
+          filterByFormula: `id="1"`,
         })
         .firstPage();
 
@@ -36,17 +36,19 @@ const createCoffeeStore = async (req, res) => {
       } else {
         // create a record
 
-				const createRecords = table.create([
-					fields: {
-						id: "2",
-						name: "Coffee and cake",
-						address: "123 street",
-						neighbourhood: "Some hood",
-						voting: 200,
-						imgUrl: "http://myimage.com",
-					},
-				]);
-				res.json({ message: "create a record", records: createRecords });
+        const createRecords = await table.create([
+          {
+            fields: {
+              id: "2",
+              name: "Coffee and cake",
+              address: "123 street",
+              neighbourhood: "Some hood",
+              voting: 200,
+              imgUrl: "http://myimage.com",
+            },
+          },
+        ]);
+        res.json({ message: "create a record", records: createRecords });
       }
     } catch (err) {
       // console log error
