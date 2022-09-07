@@ -35,7 +35,18 @@ const createCoffeeStore = async (req, res) => {
         res.json(records);
       } else {
         // create a record
-        res.json({ message: "create a record" });
+
+				const createRecords = table.create([
+					fields: {
+						id: "2",
+						name: "Coffee and cake",
+						address: "123 street",
+						neighbourhood: "Some hood",
+						voting: 200,
+						imgUrl: "http://myimage.com",
+					},
+				]);
+				res.json({ message: "create a record", records: createRecords });
       }
     } catch (err) {
       // console log error
