@@ -97,8 +97,11 @@ function CoffeeStore(initialProps) {
         setCoffeeStore(findCoffeeStoreById);
         handleCreateCoffeeStore(findCoffeeStoreById);
       }
+    } else {
+      // if it's not empty, it means it's a SSG
+      handleCreateCoffeeStore(initialProps.coffeeStore);
     }
-  }, [id]);
+  }, [id, initialProps, initialProps.coffeeStore]);
 
   const { name, address, neighborhood, imgUrl } = coffeeStore;
 
