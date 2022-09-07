@@ -16,7 +16,7 @@ const createCoffeeStore = async (req, res) => {
       // find a record
       const findCoffeeStoreRecords = await table
         .select({
-          filterByFormula: `id="1"`,
+          filterByFormula: `id="3"`,
         })
         .firstPage();
 
@@ -39,7 +39,7 @@ const createCoffeeStore = async (req, res) => {
         const createRecords = await table.create([
           {
             fields: {
-              id: "2",
+              id: "3",
               name: "Coffee and cake",
               address: "123 street",
               neighbourhood: "Some hood",
@@ -55,7 +55,8 @@ const createCoffeeStore = async (req, res) => {
             ...record.fields,
           };
         });
-        res.json({ message: "created a record", records: records });
+        // Return only the filtered records fields
+        res.json(records);
       }
     } catch (err) {
       // console log error
