@@ -22,8 +22,15 @@ const createCoffeeStore = async (req, res) => {
 
     // if it exists
     if (findCoffeeStoreRecords.length !== 0) {
-      // then return the records
-      res.json(findCoffeeStoreRecords);
+      // loop the array and find the fields object
+      const records = findCoffeeStoreRecords.map((record) => {
+        return {
+          ...record.fields,
+        };
+      });
+
+      // only return the records, not the whole table
+      res.json(records);
     } else {
       // create a record
       res.json({ message: "create a record" });
