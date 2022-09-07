@@ -16,14 +16,14 @@ import { isEmpty } from "../../utils";
 export async function getStaticProps(staticProps) {
   const { params } = staticProps;
   const coffeeStores = await fetchCoffeeStores(); // Collect dynamic data from /lib.
-  const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
+  const coffeeStoreFromContext = coffeeStores.find((coffeeStore) => {
     return coffeeStore.id.toString() === params.id; // dynamic ID
   });
   return {
     props: {
       // if findfindCoffeeStoreById exists, then findCoffeeStoreById, else create empty object
       // the empty object is the page! That givs getStaticPaths something to insert into, when dynamic.
-      coffeeStore: findCoffeeStoreById ? findCoffeeStoreById : {},
+      coffeeStore: coffeeStoreFromContext ? coffeeStoreFromContext : {},
     },
   };
 }
@@ -61,6 +61,32 @@ function CoffeeStore(initialProps) {
     state: { coffeeStores },
   } = useContext(StoreContext);
 
+  // Create coffeestore in Airtable
+  const handleCreateCoffeeStore = async (coffeeStore) => {
+    try {
+      const { id, name, voting, imgUrl, neighborhood, address } = coffeeStore;
+      // fetch the API
+      const response = await fetch("/api/createCoffeeStore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          voting: 0,
+          imgUrl,
+          neighborhood: neighborhood || "",
+          address: address || "",
+        }),
+      });
+      const dbCoffeeStore = response.json();
+      console.log({ dbCoffeeStore });
+    } catch (err) {
+      console.error("Error creating coffee store", err);
+    }
+  };
+
   useEffect(() => {
     // if coffeestore is empty, then use
     if (isEmpty(initialProps.coffeeStore)) {
@@ -69,6 +95,7 @@ function CoffeeStore(initialProps) {
       });
       if (coffeeStores.length > 0) {
         setCoffeeStore(findCoffeeStoreById);
+        handleCreateCoffeeStore(findCoffeeStoreById);
       }
     }
   }, [id]);
