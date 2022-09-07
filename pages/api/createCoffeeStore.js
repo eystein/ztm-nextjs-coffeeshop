@@ -6,21 +6,20 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
 // Make const with everything from the table
 const table = base("coffee-stores");
 
-console.log({ table });
-
 const createCoffeeStore = async (req, res) => {
   // check if POST (not GET)
   if (req.method === "POST") {
+    // take in request.body (from POST) and assign it the keys.
+    const { id, name, neighbourhood, address, imgUrl, voting } = req.body;
+
     // use "try" so I can catch errors
     try {
       // find a record
       const findCoffeeStoreRecords = await table
         .select({
-          filterByFormula: `id="3"`,
+          filterByFormula: `id=${id}`,
         })
         .firstPage();
-
-      console.log({ findCoffeeStoreRecords });
 
       // if it exists
       if (findCoffeeStoreRecords.length !== 0) {
@@ -39,12 +38,12 @@ const createCoffeeStore = async (req, res) => {
         const createRecords = await table.create([
           {
             fields: {
-              id: "3",
-              name: "Coffee and cake",
-              address: "123 street",
-              neighbourhood: "Some hood",
-              voting: 200,
-              imgUrl: "http://myimage.com",
+              id,
+              name,
+              address,
+              neighbourhood,
+              voting,
+              imgUrl,
             },
           },
         ]);
