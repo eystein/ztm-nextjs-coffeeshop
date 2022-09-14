@@ -6,6 +6,7 @@ import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 import cls from "classnames";
+import useSWR from "swr";
 
 import styles from "../../styles/coffee-store.module.css";
 import { fetchCoffeeStores } from "../../lib/coffee-stores";
@@ -108,6 +109,19 @@ function CoffeeStore(initialProps) {
   // Create a new state. Store it in state, and set it to 1 by default.
   const [votingCount, setVotingCount] = useState(1);
 
+  // Retrieve data and error
+  const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher);
+
+  // Make the count update, using data from getCoffeeStoreById
+  useEffect(() => {
+    // this is in the state, so i can update the state
+    if (data && data.length > 0) {
+      console.log("data from SWR", data);
+      setCoffeeStore(data[0]);
+      setVotingCount(data[0].voting);
+    }
+  }, [data]);
+
   const handleUpvoteButton = () => {
     console.log("handle upvote");
     // Add 1 to the count
@@ -115,6 +129,10 @@ function CoffeeStore(initialProps) {
     // Set the new count
     setVotingCount(count);
   };
+
+  if (error) {
+    return <div>Something went wrong retrieving coffeeStore page.</div>;
+  }
 
   return (
     <div className={styles.layout}>
@@ -190,3 +208,4 @@ function CoffeeStore(initialProps) {
 }
 
 export default CoffeeStore;
+export const fetcher = (url) => fetch(url).then((res) => res.json());
