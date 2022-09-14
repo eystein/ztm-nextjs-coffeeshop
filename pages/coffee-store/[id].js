@@ -44,6 +44,8 @@ export async function getStaticPaths() {
   };
 }
 
+export const fetcher = (url) => fetch(url).then((res) => res.json());
+
 function CoffeeStore(initialProps) {
   const router = useRouter();
 
@@ -208,4 +210,3 @@ function CoffeeStore(initialProps) {
 }
 
 export default CoffeeStore;
-export const fetcher = (url) => fetch(url).then((res) => res.json());
