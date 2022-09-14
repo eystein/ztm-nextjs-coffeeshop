@@ -13,8 +13,17 @@ const getCoffeeStoreById = (req, res) => {
 
   // Wrap in a try/catch block for errors
   try {
-    res.json({ message: `Id is created: ${id}` });
+    // Check if id exists
+    if (id) {
+      // return a message (can read in postman)
+      res.json({ message: `Id is created: ${id}` });
+    } else {
+      // return an error message (can read in postman)
+      res.status(400);
+      res.json({ message: "Id is missing" });
+    }
   } catch (error) {
+    // return an error message (can read in postman)
     res.status(500);
     res.json({ message: "Something went wrong", error });
   }
