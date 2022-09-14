@@ -105,8 +105,15 @@ function CoffeeStore(initialProps) {
 
   const { name, address, neighborhood, imgUrl } = coffeeStore;
 
+  // Create a new state. Store it in state, and set it to 1 by default.
+  const [votingCount, setVotingCount] = useState(1);
+
   const handleUpvoteButton = () => {
     console.log("handle upvote");
+    // Add 1 to the count
+    let count = votingCount + 1;
+    // Set the new count
+    setVotingCount(count);
   };
 
   return (
@@ -166,7 +173,7 @@ function CoffeeStore(initialProps) {
               height="24"
               alt="Rating"
             />
-            <p className={styles.text}>1</p>
+            <p className={styles.text}>{votingCount}</p>
           </div>
 
           <button
