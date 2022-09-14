@@ -1,4 +1,8 @@
-import { table, getMinifiedRecords } from "../../lib/airtable";
+import {
+  table,
+  getMinifiedRecords,
+  findRecordByFilter,
+} from "../../lib/airtable";
 
 const createCoffeeStore = async (req, res) => {
   // check if POST (not GET)
@@ -10,17 +14,11 @@ const createCoffeeStore = async (req, res) => {
     try {
       // only run if there is an id
       if (id) {
-        // find a record
-        const findCoffeeStoreRecords = await table
-          .select({
-            filterByFormula: `id="${id}"`,
-          })
-          .firstPage();
+        // Use the function from airtable.js
+        const records = await findRecordByFilter(id);
 
         // if it exists
-        if (findCoffeeStoreRecords.length !== 0) {
-          // loop the array and find the fields object
-          const records = getMinifiedRecords(findCoffeeStoreRecords); // function in airtable.js
+        if (records.length !== 0) {
           // only return the records, not the whole table
           res.json(records);
         } else {

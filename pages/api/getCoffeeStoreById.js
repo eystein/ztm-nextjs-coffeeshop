@@ -5,7 +5,11 @@
  * 3. Every function should be it's own file.
  */
 
-import { table, getMinifiedRecords } from "../../lib/airtable";
+import {
+  table,
+  getMinifiedRecords,
+  findRecordByFilter,
+} from "../../lib/airtable";
 
 // 1. File needs to be a function.
 // Bring in reqest and response properties
@@ -17,21 +21,10 @@ const getCoffeeStoreById = async (req, res) => {
   try {
     // If there is an ID
     if (id) {
-      // Lets find the ID
-      const findCoffeeStoreRecords = await table
-        .select({
-          filterByFormula: `id="${id}"`,
-        })
-        .firstPage();
-
+      // Use the function from airtable.js
+      const records = await findRecordByFilter(id);
       // If it exists -> retrieve it.
-      /*
-       * This is the main functionality,
-       * the meat of my API!
-       */
-      if (findCoffeeStoreRecords.length !== 0) {
-        // loop the array and find the fields object
-        const records = getMinifiedRecords(findCoffeeStoreRecords); // function in airtable.js
+      if (records.length !== 0) {
         // only return the records, not the whole table
         res.json(records);
       } else {
