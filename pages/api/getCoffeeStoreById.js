@@ -5,18 +5,38 @@
  * 3. Every function should be it's own file.
  */
 
+import { table, getMinifiedRecords } from "../../lib/airtable";
+
 // 1. File needs to be a function.
 // Bring in reqest and response properties
-const getCoffeeStoreById = (req, res) => {
+const getCoffeeStoreById = async (req, res) => {
   // Declare id,  from the request query
   const { id } = req.query;
 
   // Wrap in a try/catch block for errors
   try {
-    // Check if id exists
+    // If there is an ID
     if (id) {
-      // return a message (can read in postman)
-      res.json({ message: `Id is created: ${id}` });
+      // Lets find the ID
+      const findCoffeeStoreRecords = await table
+        .select({
+          filterByFormula: `id="${id}"`,
+        })
+        .firstPage();
+
+      // If it exists -> retrieve it.
+      /*
+       * This is the main functionality,
+       * the meat of my API!
+       */
+      if (findCoffeeStoreRecords.length !== 0) {
+        // loop the array and find the fields object
+        const records = getMinifiedRecords(findCoffeeStoreRecords); // function in airtable.js
+        // only return the records, not the whole table
+        res.json(records);
+      } else {
+        res.json({ message: `id could not be found` });
+      }
     } else {
       // return an error message (can read in postman)
       res.status(400);
