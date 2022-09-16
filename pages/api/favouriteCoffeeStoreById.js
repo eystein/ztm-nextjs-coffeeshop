@@ -1,10 +1,11 @@
 import { findRecordByFilter } from "../../lib/airtable";
 
-const upvoteCoffeeStoreById = async (req, res) => {
+const favouriteCoffeeStoreById = async (req, res) => {
   if (req.method === "PUT") {
+    // const { id } = req.query;
+    // res.json({ message: "body is", id });
     try {
-      const { id } = req.body;
-      // res.json({ message: "this does not works", id });
+      const { id } = req.query;
 
       if (id) {
         const records = await findRecordByFilter(id);
@@ -14,12 +15,15 @@ const upvoteCoffeeStoreById = async (req, res) => {
         } else {
           res.json({ message: "Coffee store id doesn't exist", id });
         }
+      } else {
+        res.status(400);
+        res.json({ message: "Id is missing" });
       }
     } catch (error) {
       res.status(500);
-      res.json({ message: "Error upvoting your coffeestore", error });
+      res.json({ message: "Error upvoting coffee store", error });
     }
   }
 };
 
-export default upvoteCoffeeStoreById;
+export default favouriteCoffeeStoreById;
