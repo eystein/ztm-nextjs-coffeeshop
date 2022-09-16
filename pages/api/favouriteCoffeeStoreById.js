@@ -1,4 +1,8 @@
-import { findRecordByFilter, table } from "../../lib/airtable";
+import {
+  findRecordByFilter,
+  getMinifiedRecords,
+  table,
+} from "../../lib/airtable";
 
 const favouriteCoffeeStoreById = async (req, res) => {
   if (req.method === "PUT") {
@@ -31,7 +35,8 @@ const favouriteCoffeeStoreById = async (req, res) => {
           ]);
 
           if (updateRecord) {
-            return res.json(updateRecord);
+            const minifiedRecords = getMinifiedRecords(updateRecord);
+            return res.json(minifiedRecords);
           }
 
           res.json(records);
