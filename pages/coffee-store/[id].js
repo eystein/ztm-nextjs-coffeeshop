@@ -136,6 +136,7 @@ function CoffeeStore(initialProps) {
           id,
         }),
       });
+
       const dbCoffeeStore = await response.json();
 
       if (dbCoffeeStore && dbCoffeeStore.length > 0) {
@@ -145,11 +146,6 @@ function CoffeeStore(initialProps) {
     } catch (err) {
       console.error("Error upvoting the coffee store", err);
     }
-
-    // Add 1 to the count
-    let count = votingCount + 1;
-    // Set the new count
-    setVotingCount(count);
   };
 
   if (error) {

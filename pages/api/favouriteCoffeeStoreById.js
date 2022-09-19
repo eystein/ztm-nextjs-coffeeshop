@@ -6,10 +6,16 @@ import {
 
 const favouriteCoffeeStoreById = async (req, res) => {
   if (req.method === "PUT") {
-    // const { id } = req.query;
-    // res.json({ message: "body is", id });
+    // const body = req.body;
+
+    // const body = req.body;
+    // const { id } = body;
+    // res.json({ message: "this works", body });
+    // console.log("body is: ", body);
+    // console.log("id is: ", id);
+
     try {
-      const { id } = req.query;
+      const { id } = req.body;
 
       if (id) {
         const records = await findRecordByFilter(id);
@@ -39,7 +45,7 @@ const favouriteCoffeeStoreById = async (req, res) => {
             return res.json(minifiedRecords);
           }
 
-          res.json(records);
+          // res.json(records);
         } else {
           res.json({ message: "Coffee store id doesn't exist", id });
         }
@@ -50,6 +56,7 @@ const favouriteCoffeeStoreById = async (req, res) => {
     } catch (error) {
       res.status(500);
       res.json({ message: "Error upvoting coffee store", error });
+      return;
     }
   }
 };
