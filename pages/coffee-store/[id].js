@@ -12,7 +12,7 @@ import styles from "../../styles/coffee-store.module.css";
 import { fetchCoffeeStores } from "../../lib/coffee-stores";
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store-context";
-import { isEmpty } from "../../utils";
+import { fetcher, isEmpty } from "../../utils";
 
 export async function getStaticProps(staticProps) {
   const { params } = staticProps;
@@ -43,8 +43,6 @@ export async function getStaticPaths() {
     fallback: true,
   };
 }
-
-export const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function CoffeeStore(initialProps) {
   const router = useRouter();

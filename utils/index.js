@@ -1,4 +1,5 @@
 export const isEmpty = (obj) => {
-  // Check if there are zero keys in the object.
-  return Object.keys(obj).length === 0;
+  return obj && Object.keys(obj).length === 0;
 };
+
+export const fetcher = (url) => fetch(url).then((res) => res.json());
