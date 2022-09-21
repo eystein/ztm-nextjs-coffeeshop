@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/prop-types */
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
@@ -22,7 +19,7 @@ export async function getStaticProps(staticProps) {
   });
   return {
     props: {
-      // if findfindCoffeeStoreById exists, then findCoffeeStoreById, else create empty object
+      // if findCoffeeStoreById exists, then findCoffeeStoreById, else create empty object
       // the empty object is the page! That givs getStaticPaths something to insert into, when dynamic.
       coffeeStore: coffeeStoreFromContext ? coffeeStoreFromContext : {},
     },
