@@ -6,14 +6,6 @@ import {
 
 const favouriteCoffeeStoreById = async (req, res) => {
   if (req.method === "PUT") {
-    // const body = req.body;
-
-    // const body = req.body;
-    // const { id } = body;
-    // res.json({ message: "this works", body });
-    // console.log("body is: ", body);
-    // console.log("id is: ", id);
-
     try {
       const { id } = req.body;
 
@@ -26,9 +18,6 @@ const favouriteCoffeeStoreById = async (req, res) => {
 
           // parseInt, turn a string into a number
           const calculateVoting = parseInt(record.voting) + parseInt(1);
-
-          // check that it works
-          console.log({ calculateVoting, id: record.id });
 
           // update a record
           const updateRecord = await table.update([

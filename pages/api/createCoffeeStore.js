@@ -52,8 +52,6 @@ const createCoffeeStore = async (req, res) => {
         res.json({ message: "Id is missing." });
       }
     } catch (err) {
-      // console log error
-      console.log("Error creating or finding a store", err);
       // Send a response
       res.status(500);
       // Also give user an error
