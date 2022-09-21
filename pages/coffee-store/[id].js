@@ -79,7 +79,6 @@ function CoffeeStore(initialProps) {
         }),
       });
       const dbCoffeeStore = response.json();
-      console.log({ dbCoffeeStore });
     } catch (err) {
       console.error("Error creating coffee store", err);
     }
@@ -104,16 +103,17 @@ function CoffeeStore(initialProps) {
   const { name, address, neighborhood, imgUrl } = coffeeStore;
 
   // Create a new state. Store it in state, and set it to 1 by default.
-  const [votingCount, setVotingCount] = useState(1);
+  const [votingCount, setVotingCount] = useState(0);
 
   // Retrieve data and error
-  const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher);
+  const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher, {
+    refreshInterval: 1000,
+  });
 
   // Make the count update, using data from getCoffeeStoreById
   useEffect(() => {
     // this is in the state, so i can update the state
     if (data && data.length > 0) {
-      console.log("data from SWR", data);
       setCoffeeStore(data[0]);
       setVotingCount(data[0].voting);
     }
