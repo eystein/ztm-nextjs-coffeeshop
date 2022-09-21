@@ -30,7 +30,7 @@ export default function Home(props) {
   const { coffeeStores, latLong } = state;
 
   useEffect(() => {
-    async function setCoffeeStoresByLocation() {
+    const setCoffeeStoresByLocation = async () => {
       if (latLong) {
         try {
           const response = await fetch(
@@ -51,9 +51,9 @@ export default function Home(props) {
           setCoffeeStoresError(error.message);
         }
       }
-    }
+    };
     setCoffeeStoresByLocation();
-  }, [latLong]);
+  }, [latLong, dispatch]);
 
   const handleOnBannerBtnClick = () => {
     // Call function from /hooks
@@ -112,7 +112,7 @@ export default function Home(props) {
         )}
         {props.coffeeStores.length > 0 && (
           <div className={styles.sectionWrapper}>
-            <h2 className={styles.heading2}>Chamonix stores</h2>
+            <h2 className={styles.heading2}>Oslo stores</h2>
             <div className={styles.cardLayout}>
               {props.coffeeStores.map((coffeeStore) => {
                 return (

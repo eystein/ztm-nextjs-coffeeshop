@@ -44,15 +44,13 @@ export async function getStaticPaths() {
 function CoffeeStore(initialProps) {
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   // Get the id from the URL/router (to use for dynamic pages)
   const id = router.query.id;
 
   // Set the props to use the initial state
-  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore);
+  const [coffeeStore, setCoffeeStore] = useState(
+    initialProps.coffeeStore || {}
+  );
 
   // Get the state from context
   const {
@@ -98,9 +96,14 @@ function CoffeeStore(initialProps) {
       // if it's not empty, it means it's a SSG
       handleCreateCoffeeStore(initialProps.coffeeStore);
     }
-  }, [id, initialProps, initialProps.coffeeStore]);
+  }, [id, initialProps, initialProps.coffeeStore, coffeeStores]);
 
-  const { name, address, neighborhood, imgUrl } = coffeeStore;
+  const {
+    name = "",
+    address = "",
+    neighborhood = "",
+    imgUrl = "",
+  } = coffeeStore;
 
   // Create a new state. Store it in state, and set it to 1 by default.
   const [votingCount, setVotingCount] = useState(0);
@@ -118,6 +121,10 @@ function CoffeeStore(initialProps) {
       setVotingCount(data[0].voting);
     }
   }, [data]);
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   const handleUpvoteButton = async () => {
     try {
