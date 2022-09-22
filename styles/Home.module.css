@@ -19,6 +19,7 @@
   position: absolute;
   top: 0px;
   z-index: 1;
+  aspect-ratio: 800 / 343;
 }
 
 .cardLayout {

@@ -41,6 +41,7 @@
 
 .cardImage {
   border-radius: 0.75rem /* 12px */;
+  aspect-ratio: 16 / 9;
 }
 
 @media (min-width: 1024px) {

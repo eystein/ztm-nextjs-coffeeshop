@@ -64,7 +64,10 @@ export default function Home(props) {
     <div className={styles.container}>
       <Head>
         <title>Coffee Connoisseur</title>
-        <meta name="description" content="A next.js test app for Eystein" />
+        <meta
+          name="description"
+          content="Allows you to find coffee stores near you."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -83,10 +86,10 @@ export default function Home(props) {
         </div>
         <div className={styles.heroImage}>
           <Image
-            src="/static/hero-image.png"
+            src="/static/hero-image.webp"
             alt="Illustration of woman sitting on a cloud and drinking coffee."
-            width={700}
-            height={400}
+            width={800}
+            height={343}
           />
         </div>
         {coffeeStores.length > 0 && (
