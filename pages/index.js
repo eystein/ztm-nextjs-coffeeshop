@@ -63,7 +63,7 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Coffee Connoisseur</title>
+        <title>Coffee near you</title>
         <meta
           name="description"
           content="Allows you to find coffee stores near you."
