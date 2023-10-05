@@ -15,7 +15,7 @@
 }
 
 .title1 {
-  color: rgba(249, 250, 251, 1);
+  color: var(--text-purple);;
 }
 
 .title2 {
@@ -27,8 +27,7 @@
   margin-top: 0.75rem;
   font-size: 1.5rem /* 24px */;
   line-height: 2rem /* 32px */;
-
-  color: var(--text-white-100);
+  color: var(--text-black);
 }
 
 .buttonWrapper {

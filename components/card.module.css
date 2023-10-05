@@ -1,23 +1,16 @@
 .cardLink {
   margin: auto;
-  --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  box-shadow: 0 0 transparent, 0 0 #0000, 0 0 transparent, 0 0 #0000,
-    0 0 transparent;
-
-  border-color: var(--text-white-100);
+  border: 1px solid var(--divider-color);
   border-radius: 0.75rem /* 12px */;
+	background: linear-gradient(160deg,var(--reply-to-faded-color),transparent min(160px,50%));
 }
 
 .container {
   border-radius: 0.75rem /* 12px */;
   padding-top: 0.25rem /* 4px */;
-  padding-bottom: 0.25rem /* 4px */;
   padding-bottom: 1.25rem /* 20px */;
   padding-left: 1rem /* 16px */;
-  padding-right: 1rem /* 16px */;
-
-  backdrop-filter: blur(10px);
+  padding-right: 1rem /* 16px */; 
 }
 
 .cardHeaderWrapper {
